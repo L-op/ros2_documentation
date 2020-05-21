@@ -165,6 +165,17 @@ Breaking change in Node Interface getters' signature
 With pull request `ros2/rclcpp#1069 <https://github.com/ros2/rclcpp/pull/1069>`_, the signature of node interface getters has been modified to return shared ownership of node interfaces (i.e. an ``std::shared_ptr``) instead of a non-owning raw pointer.
 Required changes in downstream packages that relied on the previous signature are simple and straightforward: use the ``std::shared_ptr::get()`` method.
 
+rclcpp_action
+^^^^^^^^^^^^^
+
+Deprecate ClientGoalHandle::async_result()
+""""""""""""""""""""""""""""""""""""""""""
+
+Using this API, it is possible to run into a race condition causing an exception to be thrown.
+Instead, prefer to use ``Client::async_get_result()``, which is safer.
+
+See `ros2/rclcpp#1120 <https://github.com/ros2/rclcpp/pull/1120>`_ and the connect issue for more info.
+
 rclpy
 ^^^^^
 
